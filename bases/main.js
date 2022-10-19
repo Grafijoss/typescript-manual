@@ -1,93 +1,65 @@
 "use strict";
-(() => {
-    class Mutante {
-        constructor(name, realName) {
-            this.name = name;
-            this.realName = realName;
-        }
+function getArray(items) {
+    return new Array().concat(items);
+}
+let numberArray = getArray([5, 10, 15, 20]);
+let stringArray = getArray(['Cats', 'Dogs', 'Birds']);
+numberArray.push('hola');
+stringArray.push(10);
+function getArrayGeneric(items) {
+    return new Array().concat(items);
+}
+let numberArrayGeneric = getArrayGeneric([5, 10, 15, 20]);
+let stringArrayGeneric = getArrayGeneric(['Cats', 'Dogs', 'Birds']);
+function identity(value, message) {
+    console.log(message);
+    return value;
+}
+identity('Hola', 'Jose');
+identity('Hola', 'Jose');
+function identity2(value, message) {
+    let result = '';
+    let typeValue = typeof value;
+    if (typeof value === 'number') {
+        result = value + value;
     }
-    class Xmen extends Mutante {
-        salvarMundo() {
-            return 'Mundo a salvo!';
-        }
+    else if (typeof value === 'string') {
+        result = value + value;
     }
-    class Villian extends Mutante {
-        conquistarMundo() {
-            return 'Mundo conquistado';
-        }
+    console.log(`The message is ${message} and the function returns a ${typeValue} value of ${result}`);
+    return result;
+}
+identity2(5, 'Jose');
+identity2('5', 'Jose');
+const identityObj = {
+    value: 5,
+    message: 'Hola'
+};
+const identityObj2 = {
+    value: '5',
+    message: 'Hola'
+};
+const process = (value, message) => {
+    console.log(message);
+    return value;
+};
+const processor = process;
+class processIdentityClass {
+    constructor(value, message) {
+        this.value = value;
+        this.message = message;
     }
-    const wolverine = new Xmen('Wolverine', 'Logan');
-    const magneto = new Villian('Magneto', 'Magnus');
-    const printName = (character) => {
-        console.log(character.realName);
-    };
-})();
-(() => {
-    class Avenger {
-        constructor(name, team, realName) {
-            this.name = name;
-            this.team = team;
-            this.realName = realName;
-        }
-        static getAvgAge() {
-            return this.name;
-        }
-        bio() {
-            return `${this.name} (${this.team})!!!`;
-        }
+    process() {
+        return this.value;
     }
-    Avenger.avgAge = 35;
-})();
-(() => {
-    class Avenger {
-        constructor(name, realName) {
-            this.name = name;
-            this.realName = realName;
-            console.log('Constructor Avenger llamado!');
-        }
-        getFullname() {
-            return `${this.name} ${this.realName}`;
-        }
+}
+class processIdentityClassNoInterface {
+    constructor(value, message) {
+        this.value = value;
+        this.message = message;
     }
-    class Xmen extends Avenger {
-        constructor(name, realName, isMutant) {
-            super(name, realName);
-            this.isMutant = isMutant;
-            console.log('Constructor Xmen llamado');
-        }
-        get fullName() {
-            return `${this.name} - ${this.realName}`;
-        }
-        set fullName(name) {
-            if (name.length < 3) {
-                throw new Error('EL nombre debe de ser mayor de 3 letras');
-            }
-            this.name = name;
-        }
-        getFullnameDesdeXmen() {
-            console.log(super.getFullname());
-        }
+    process() {
+        return this.value;
     }
-})();
-(() => {
-    class Apocalipsis {
-        constructor(name) {
-            this.name = name;
-        }
-        static callApocalipsis() {
-            if (!Apocalipsis.intance) {
-                Apocalipsis.intance = new Apocalipsis('Soy apocalipsis el único');
-            }
-            return Apocalipsis.intance;
-        }
-        changeName(newName) {
-            this.name = newName;
-        }
-    }
-    const apocalipsis1 = Apocalipsis.callApocalipsis();
-    const apocalipsis2 = Apocalipsis.callApocalipsis();
-    const apocalipsis3 = Apocalipsis.callApocalipsis();
-    apocalipsis1.changeName('Xavier');
-    console.log(apocalipsis1, apocalipsis2, apocalipsis3);
-})();
+}
 //# sourceMappingURL=main.js.map
